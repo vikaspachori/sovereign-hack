@@ -18,7 +18,7 @@ export class HighChartService {
         plotBorderWidth: null,
         plotShadow: false,
         type: 'pie',
-        
+
         events: {
           load: function (event) {
             var chart = this,
@@ -31,11 +31,17 @@ export class HighChartService {
               total += points[i].y;
             }
 
+
+
+            chart.setSubtitle({
+              text: "Total: "+ total.toFixed(2) + me.suffix,
+              style: {
+                fontWeight: 'bold',
+              },
+            });
+
             chart.setTitle({
-              text: total.toFixed(2) + me.suffix,
-              align: 'center',
-              verticalAlign: 'middle',
-              y: -10,
+              text: 'TOTAL VALUE LOCKED(' + me.suffix + ')',
               style: {
                 fontWeight: 'bold'
               },
@@ -43,7 +49,7 @@ export class HighChartService {
           }
         }
       },
-
+      
       tooltip: {
         pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
       },
@@ -59,8 +65,8 @@ export class HighChartService {
         }
       },
       series: [{
-        size: '60%',
-        innerSize: '85%',
+        size: '90%',
+        innerSize: '55%',
         colorByPoint: true,
         data: []
       }]
