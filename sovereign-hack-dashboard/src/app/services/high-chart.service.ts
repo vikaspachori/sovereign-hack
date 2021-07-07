@@ -5,14 +5,20 @@ import * as Highcharts from 'highcharts';
 })
 export class HighChartService {
   defaultOptions: any
-  constructor() {
+  suffix = "BTC";
 
+  public updateSuffix(data) {
+    this.suffix = data;
+  }
+  constructor() {
+    const me = this;
     this.defaultOptions = {
       chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
         type: 'pie',
+        
         events: {
           load: function (event) {
             var chart = this,
@@ -26,7 +32,7 @@ export class HighChartService {
             }
 
             chart.setTitle({
-              text: total.toFixed(2),
+              text: total.toFixed(2) + me.suffix,
               align: 'center',
               verticalAlign: 'middle',
               y: -10,
@@ -37,9 +43,7 @@ export class HighChartService {
           }
         }
       },
-      title: {
-        text: 'TOTAL VALUE LOCKED(BTC)'
-      },
+
       tooltip: {
         pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
       },
@@ -57,21 +61,8 @@ export class HighChartService {
       series: [{
         size: '60%',
         innerSize: '85%',
-        name: 'TOTAL VALUE LOCKED(BTC)',
         colorByPoint: true,
-        data: [{
-          name: 'Protocol Contract',
-          y: 95.1265
-        }, {
-          name: 'Lending Contract',
-          y: 146.1551
-        }, {
-          name: 'Amm Contract',
-          y: 1425.1608
-        }, {
-          name: 'Bitocracy Staking Contract',
-          y: 19140.5178
-        }]
+        data: []
       }]
     }
   }
@@ -79,9 +70,10 @@ export class HighChartService {
 
 
 
-  createChart(container, options?: Object) {
+  createChart(container, seriesData: any, suffix: string) {
     let opts = this.defaultOptions;
-    console.log(opts)
+    this.defaultOptions.series[0].data = seriesData;
+    this.updateSuffix(suffix)
     let e = document.createElement("div");
 
     container.appendChild(e);

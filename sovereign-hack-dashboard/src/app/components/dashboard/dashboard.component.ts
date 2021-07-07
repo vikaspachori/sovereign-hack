@@ -19,8 +19,8 @@ export class DashboardComponent implements OnInit {
   lendingData: LendingStats[];
   ngOnInit(): void {
     this.lendingData = this.dataService.getLendingStats();
-    this.highchartService.createChart(document.getElementById("btc"));
-    this.highchartService.createChart(document.getElementById("usd"));
+    this.highchartService.createChart(document.getElementById("btc"), this.dataService.getPieChartDataBTC(), "BTC");
+    this.highchartService.createChart(document.getElementById("usd"), this.dataService.getPieChartDataUSD(), "USD");
   }
 
 }

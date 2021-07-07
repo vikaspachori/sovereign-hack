@@ -84,4 +84,36 @@ export class DataService {
 
     return tempARra;
   }
+
+  getPieChartDataBTC(): any {
+    return [{
+      name: 'Protocol Contract',
+      y: 95.1265
+    }, {
+      name: 'Lending Contract',
+      y: 146.1551
+    }, {
+      name: 'Amm Contract',
+      y: 1425.1608
+    }, {
+      name: 'Bitocracy Staking Contract',
+      y: 19140.5178
+    }]
+  }
+
+  getPieChartDataUSD(): any {
+    return [{
+      name: 'Protocol Contract',
+      y: 3323372.36
+    }, {
+      name: 'Lending Contract',
+      y: 5075297.78
+    }, {
+      name: 'Amm Contract',
+      y: 49778264.73
+    }, {
+      name: 'Bitocracy Staking Contract',
+      y: 663072123.61
+    }]
+  }
 }
