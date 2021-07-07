@@ -22,14 +22,16 @@ time, mark, audio, video {
 body {
     line-height:1;
     overflow-x: hidden;
-    background-color: #e4e3e3;
+    background-color:#171717;
 }
 
 article,aside,details,figcaption,figure,
 footer,header,hgroup,menu,nav,section {
     display:block;
 }
-
+.fl{
+    float: left;
+}
 nav ul {
     list-style:none;
 }

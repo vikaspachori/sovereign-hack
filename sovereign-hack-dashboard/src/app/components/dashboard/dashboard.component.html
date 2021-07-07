@@ -1,11 +1,11 @@
 <div class="row">
-  <div class="col-xl-3 col-md-3 col-sm-12 col-xs-12">
+  <div class="col-xl-4 col-md-4 col-sm-12 col-xs-12">
     <div class="card dashcard">
       <div class="dash-card-heading">
         <div class="card-img-top dashimagebg" alt="Card image cap"></div>
         <h3 class="dash-card-title">TRANSACTION VOLUME</h3>
       </div>
-      <div class="card-body theme-bg">
+      <div class="card-body">
         <div class="dash-card-info">
           <div class="vol-info">
             <fa-icon [icon]="faCoins"></fa-icon>
@@ -19,11 +19,67 @@
       </div>
     </div>
   </div>
-  <div class="col-xl-5 col-md-5 col-sm-12 col-xs-12">progress bar chart</div>
+  <div
+    class="col-xl-8 col-md-8 col-sm-12 col-xs-12 dash-widget-shadow p-0"
+    style="height: 311px; overflow: auto"
+  >
+    <table class="table" style="background-color: whitesmoke; height: 100%">
+      <thead class="thead-dark">
+        <tr>
+          <th class="dash-table-cell" scope="col">Asset</th>
+          <th class="dash-table-cell" scope="col">Total Asset Supplied</th>
+          <th class="dash-table-cell" scope="col">Total Asset Borrowed</th>
+          <th class="dash-table-cell" scope="col">Total Available</th>
+          <th class="dash-table-cell" scope="col">Supply APR</th>
+          <th class="dash-table-cell" scope="col">Borrow APR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of lendingData">
+          <td class="dash-table-cell">
+            <img
+              class="tw-inline fl"
+              [src]="item.logo"
+              alt=""
+              style="height: 30px"
+            />
+            <div class="fl m-2 dash-table-font">
+              {{ item.assetName }}
+            </div>
+          </td>
+          <td class="dash-table-cell">
+            <span class="dash-table-font"
+              >{{ item.assetsupplied }} {{ item.assetName }}</span
+            >
+          </td>
+          <td class="dash-table-cell">
+            <span class="dash-table-font"
+              >{{ item.assetborrowed }} {{ item.assetName }}</span
+            >
+          </td>
+          <td class="dash-table-cell">
+            <span class="dash-table-font"
+              >{{ item.available }} {{ item.assetName }}</span
+            >
+          </td>
+          <td class="dash-table-cell">
+            <span class="dash-table-font">{{ item.supplyAPR }} %</span>
+          </td>
+          <td class="dash-table-cell">
+            <span class="dash-table-font">{{ item.borrowAPR }} %</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div class="row">
-  <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12">one line chart</div>
-
-  <div class="col-xl-5 col-md-5 col-sm-12 col-xs-12">one bar chart</div>
+<div class="row p-3">
+  <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12 p-0">
+    <div class="dash-widget-shadow" id="btc" style="padding-right: 2px;"></div>
+  </div>
+  <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12 p-0">
+    <div id="usd" class="dash-widget-shadow dash-chart-body" style="padding-left:2px"></div>
+    >
+  </div>
 </div>
