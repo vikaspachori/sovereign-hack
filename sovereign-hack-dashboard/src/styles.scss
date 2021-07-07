@@ -21,6 +21,7 @@ time, mark, audio, video {
 
 body {
     line-height:1;
+    overflow-x: hidden;
 }
 
 article,aside,details,figcaption,figure,
@@ -92,3 +93,7 @@ hr {
 input, select {
     vertical-align:middle;
 }/* You can add global styles to this file, and also import other style files */
+
+
+
+@import "~bootstrap/dist/css/bootstrap.css"
