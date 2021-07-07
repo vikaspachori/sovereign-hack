@@ -1,25 +1,36 @@
 .dashimagebg{
     background-image: url(https://live.sovryn.app/static/media/sovryn-logo-white.8b20e555.svg);
     background-repeat: no-repeat;
-    background-color: rgb(6 6 6);
+    background-color: #060606;
     padding: 22px;
     margin-top: 50px;
-    margin-left: 75px;
-    width: auto
+    /* margin-left: 75px; */
+    width: 250px;
+    margin: 0 auto;
+    margin-top: 45px;
 }
 
 .dashcard{
-    height : 310px
+    height : 310px;
+    box-shadow: 1px 0px 8px 3px white
 }
 
 .dash-card-heading{
     height: 150px;
-    background: black
+    background: black;
+    text-align: center;
 }
 
 .dash-card-title{
-    margin-left: 109px;
     color: white;
     font-weight: 900;
     text-shadow: 1px 4px 6px #b98628;
+}
+
+.vol-info{
+    padding: 12px;
+    font-weight: 800;
+    /* opacity: 0.7; */
+    font-size: 32px;
+    text-shadow: -1px 1px 2px black;
 }
