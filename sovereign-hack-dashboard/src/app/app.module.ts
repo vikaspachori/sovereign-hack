@@ -7,12 +7,14 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SwapComponent } from './components/swap/swap.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    SwapComponent
   ],
   imports: [
     BrowserModule,
