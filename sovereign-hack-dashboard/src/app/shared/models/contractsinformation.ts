@@ -1,4 +1,4 @@
-export const contracts = {
+export const contractsInformation = {
     sovrynProtocol: {
         address: '0x5A0D867e0D70Fcc6Ade25C3F1B89d618b5B4Eaa7',
         abi: "bzxAbi",
