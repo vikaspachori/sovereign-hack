@@ -11,3 +11,11 @@
   text-shadow: -1px 1px 3px #cdb9b9;
   font-size: 14px;
 }
+
+#swaptable {
+  overflow: auto;
+}
+
+tr:nth-child(even) {
+    background-color: #282828
+}

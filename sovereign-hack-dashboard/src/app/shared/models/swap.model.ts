@@ -8,3 +8,9 @@ export interface SwapInterface {
     traderName?: string,
     traderAddres?: string
 }
+
+export interface SwapData {
+    swapdata: SwapInterface[],
+    fromVal: {},
+    toVal: {}
+}

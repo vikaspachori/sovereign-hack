@@ -13,6 +13,8 @@ export class SwapComponent implements OnInit {
   data: Array<SwapInterface>
   async ngOnInit(): Promise<void> {
     this.data = await this.covalentapi.getSwapData("30");
+    document.getElementById("swaptable").style.height = (window.innerHeight - 88) + "px"
+
   }
 
 }

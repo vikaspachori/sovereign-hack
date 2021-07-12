@@ -31,7 +31,7 @@ export class CovalentapService {
   }
   private formatSwapData(data: any): Array<SwapInterface> {
     const swappedDataArray = new Array<SwapInterface>();
-  
+    const hashObject = {};
     for (let index = 0; index < data.length; index++) {
       const swapData: SwapInterface = {};
 
