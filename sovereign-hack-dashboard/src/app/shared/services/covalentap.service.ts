@@ -22,8 +22,6 @@ export class CovalentapService {
     const swapDataurl = `${environment.apiUrl}${chainid}/events/address/${environment.address}/?starting-block=${blockHeight}&ending-block=latest&key=${environment.apiKey}`;
     const swapdata = await this.http.get(swapDataurl).toPromise() as any;
     return this.formatSwapData(swapdata.data.items)
-
-    return null;
   }
 
   private getAdddressName(address: string): string {
@@ -33,9 +31,10 @@ export class CovalentapService {
   }
   private formatSwapData(data: any): Array<SwapInterface> {
     const swappedDataArray = new Array<SwapInterface>();
-    const swapData: SwapInterface = {};
-
+  
     for (let index = 0; index < data.length; index++) {
+      const swapData: SwapInterface = {};
+
       const params = data[index].decoded.params;
       for (let i = 0; i < params.length; i++) {
         const element = params[i];

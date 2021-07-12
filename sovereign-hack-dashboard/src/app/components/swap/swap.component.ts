@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SwapInterface } from 'src/app/shared/models/swap.model';
 import { CovalentapService } from 'src/app/shared/services/covalentap.service';
 
 @Component({
@@ -9,10 +10,9 @@ import { CovalentapService } from 'src/app/shared/services/covalentap.service';
 export class SwapComponent implements OnInit {
 
   constructor(private covalentapi: CovalentapService) { }
-
+  data: Array<SwapInterface>
   async ngOnInit(): Promise<void> {
-    const data = await this.covalentapi.getSwapData("30");
-    debugger;
+    this.data = await this.covalentapi.getSwapData("30");
   }
 
 }
