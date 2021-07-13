@@ -1,36 +1,43 @@
 <div class="swap-container">
   <div class="row">
     <div class="table-container col-md-6" id="swaptable">
-      <table class="table" style="color: white">
-        <thead class="thead-dark">
-          <tr>
-            <th class="dash-table-cell" scope="col">From</th>
-            <th class="dash-table-cell" scope="col">To</th>
-            <th class="dash-table-cell" scope="col">From Value</th>
-            <th class="dash-table-cell" scope="col">To Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of data">
-            <td class="dash-table-cell">
-              <span class="dash-table-font">{{ item.fromTokenName }}</span>
-            </td>
-            <td class="dash-table-cell">
-              <span class="dash-table-font">{{ item.toTokenName }}</span>
-            </td>
-            <td class="dash-table-cell">
-              <span class="dash-table-font">{{ item.fromTokenValue }}</span>
-            </td>
-            <td class="dash-table-cell">
-              <span class="dash-table-font">{{ item.toTokenValue }}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="row">
+        <div class="ratio-container col-md-6 col-xl-6" id="fromaddress"></div>
+        <div class="ratio-container col-md-6 col-xl-6" id="toaddress"></div>
+      </div>
+      <div style="height: 405px;overflow: auto;">
+        <table class="table" style="color: white">
+          <thead class="thead-dark">
+            <tr>
+              <th class="dash-table-cell" scope="col">From</th>
+              <th class="dash-table-cell" scope="col">To</th>
+              <th class="dash-table-cell" scope="col">From Value</th>
+              <th class="dash-table-cell" scope="col">To Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data">
+              <td class="dash-table-cell">
+                <span class="dash-table-font">{{ item.fromTokenName }}</span>
+              </td>
+              <td class="dash-table-cell">
+                <span class="dash-table-font">{{ item.toTokenName }}</span>
+              </td>
+              <td class="dash-table-cell">
+                <span class="dash-table-font">{{ item.fromTokenValue }}</span>
+              </td>
+              <td class="dash-table-cell">
+                <span class="dash-table-font">{{ item.toTokenValue }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    
     </div>
-    <div class="col-md-6 col-xl-6">
-      <div class="ratio-container" id="fromaddress"></div>
-      <div class="ratio-container" id="toaddress"></div>
+    <div class="barcharts col-md-6 col-xl-6">
+        <div class="ratio-container" id="fromaddressbar" style="margin-bottom: 5px;"></div>
+        <div class="ratio-container" id="toaddressbar"></div>
     </div>
   </div>
 </div>

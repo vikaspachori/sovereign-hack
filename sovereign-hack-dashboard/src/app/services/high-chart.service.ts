@@ -6,7 +6,7 @@ import * as Highcharts from 'highcharts';
 export class HighChartService {
   defaultOptions: any
   suffix = "BTC";
-
+  combinedoption: any;
   public updateSuffix(data) {
     this.suffix = data;
   }
@@ -81,6 +81,7 @@ export class HighChartService {
     this.defaultOptions.series[0].data = seriesData;
 
     if (title) {
+      this.defaultOptions.tooltip.pointFormat =""
       delete this.defaultOptions.chart.events
       this.defaultOptions.title = {
         text: title
@@ -95,6 +96,35 @@ export class HighChartService {
     if (opts.chart) {
       // opts.chart['renderTo'] = e;
     }
+    Highcharts.chart(container, opts);
+  }
+
+  createCombinationChart(container, cats, seriesdata, seriesname, title, subtitle): void {
+    //, title, cats, concurrencydata, pietitle
+
+    this.combinedoption = {
+      title: {
+        text: title
+      },
+      subtitle: {
+        text: subtitle
+      },
+      xAxis: {
+        categories: cats
+      },
+      series: [{
+        type: 'column',
+        name: seriesname,
+        data: seriesdata
+      }]
+    }
+    let opts = this.combinedoption;
+
+    let e = document.createElement("div");
+
+    container.appendChild(e);
+
+
     Highcharts.chart(container, opts);
   }
 }
