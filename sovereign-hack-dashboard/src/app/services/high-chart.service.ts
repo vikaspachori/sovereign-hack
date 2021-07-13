@@ -19,35 +19,7 @@ export class HighChartService {
         plotShadow: false,
         type: 'pie',
 
-        events: {
-          load: function (event) {
-            var chart = this,
-              points = chart.series[0].points,
-              len = points.length,
-              total = 0,
-              i = 0;
 
-            for (; i < len; i++) {
-              total += points[i].y;
-            }
-
-
-
-            chart.setSubtitle({
-              text: "Total: " + total.toFixed(2) + me.suffix,
-              style: {
-                fontWeight: 'bold',
-              },
-            });
-
-            chart.setTitle({
-              text: 'TOTAL VALUE LOCKED(' + me.suffix + ')',
-              style: {
-                fontWeight: 'bold'
-              },
-            });
-          }
-        }
       },
 
       tooltip: {
@@ -77,14 +49,47 @@ export class HighChartService {
 
 
   createChart(container, seriesData: any, suffix: string, title: String = null) {
-    let opts = this.defaultOptions;
-    this.defaultOptions.series[0].data = seriesData;
 
+    this.defaultOptions.series[0].data = seriesData;
+    const me  = this;
+    let opts = { ...this.defaultOptions };
+    debugger
     if (title) {
-      this.defaultOptions.tooltip.pointFormat =""
-      delete this.defaultOptions.chart.events
-      this.defaultOptions.title = {
+      opts.tooltip.pointFormat = ""
+      delete opts.chart.events
+      opts.title = {
         text: title
+      }
+    }
+    else {
+      opts.chart.events = {
+        load: function (event) {
+          var chart = this,
+            points = chart.series[0].points,
+            len = points.length,
+            total = 0,
+            i = 0;
+
+          for (; i < len; i++) {
+            total += points[i].y;
+          }
+
+
+
+          chart.setSubtitle({
+            text: "Total: " + total.toFixed(2) + me.suffix,
+            style: {
+              fontWeight: 'bold',
+            },
+          });
+
+          chart.setTitle({
+            text: 'TOTAL VALUE LOCKED(' + me.suffix + ')',
+            style: {
+              fontWeight: 'bold'
+            },
+          });
+        }
       }
     }
 
