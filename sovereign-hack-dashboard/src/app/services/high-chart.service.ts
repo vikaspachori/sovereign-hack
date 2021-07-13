@@ -34,7 +34,7 @@ export class HighChartService {
 
 
             chart.setSubtitle({
-              text: "Total: "+ total.toFixed(2) + me.suffix,
+              text: "Total: " + total.toFixed(2) + me.suffix,
               style: {
                 fontWeight: 'bold',
               },
@@ -49,7 +49,7 @@ export class HighChartService {
           }
         }
       },
-      
+
       tooltip: {
         pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
       },
@@ -76,9 +76,17 @@ export class HighChartService {
 
 
 
-  createChart(container, seriesData: any, suffix: string) {
+  createChart(container, seriesData: any, suffix: string, title: String = null) {
     let opts = this.defaultOptions;
     this.defaultOptions.series[0].data = seriesData;
+
+    if (title) {
+      delete this.defaultOptions.chart.events
+      this.defaultOptions.title = {
+        text: title
+      }
+    }
+
     this.updateSuffix(suffix)
     let e = document.createElement("div");
 
