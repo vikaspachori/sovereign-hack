@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sovereign-hack-dashboard';
+  constructor(){
+    setTimeout(() => {
+      document.getElementById("pagecontainer").classList.remove("filter");
+    }, 1000);
+  }
 }

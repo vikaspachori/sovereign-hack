@@ -3,6 +3,7 @@ import { DataService } from 'src/app/services/data.service';
 import { HighChartService } from 'src/app/services/high-chart.service';
 import { SwapData, SwapInterface } from 'src/app/shared/models/swap.model';
 import { CovalentapService } from 'src/app/shared/services/covalentap.service';
+import { LoaderService } from 'src/app/shared/services/loader.service';
 
 @Component({
   selector: 'app-swap',
@@ -11,7 +12,7 @@ import { CovalentapService } from 'src/app/shared/services/covalentap.service';
 })
 export class SwapComponent implements OnInit {
 
-  constructor(private covalentapi: CovalentapService, private dataService: DataService, private highChart: HighChartService) { }
+  constructor(private covalentapi: CovalentapService, private loader: LoaderService, private highChart: HighChartService) { }
   data: Array<SwapInterface>;
   swapdata: SwapData;
   fromvalueChartData = {};
@@ -19,6 +20,7 @@ export class SwapComponent implements OnInit {
   totalFromVal = 0;
   totalToVal = 0;
   async ngOnInit(): Promise<void> {
+    this.loader.showLoader();
     this.swapdata = await this.covalentapi.getSwapData("30");
     this.data = this.swapdata.swapdata;
     this.getBarChartData(this.data);
@@ -26,9 +28,11 @@ export class SwapComponent implements OnInit {
     this.highChart.createChart(document.getElementById("toaddress"), this.getKeyvalue(this.swapdata.toVal), "", "Contribution to token( wallet freq)");
     const fromSeriesData = Object.keys(this.fromvalueChartData).map(d => this.fromvalueChartData[d]);
     const toSeriesData = Object.keys(this.toValueChartData).map(d => this.toValueChartData[d]);
-    debugger
     this.highChart.createCombinationChart(document.getElementById("fromaddressbar"), Object.keys(this.fromvalueChartData), fromSeriesData, "Transaction From", "From Transaction By Wallet", this.totalFromVal);
     this.highChart.createCombinationChart(document.getElementById("toaddressbar"), Object.keys(this.toValueChartData), toSeriesData, "Transaction To", "To Transaction By Wallet", this.totalToVal);
+    setTimeout(() => {
+      this.loader.hideLoader()
+    }, 0);
   }
 
 
@@ -56,7 +60,7 @@ export class SwapComponent implements OnInit {
         this.toValueChartData[element.toTokenName] += this.totalToVal
       }
     }
-    
+
   }
 
   private getKeyvalue(data): any {
