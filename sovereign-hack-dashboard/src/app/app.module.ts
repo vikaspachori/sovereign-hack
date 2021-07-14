@@ -8,13 +8,15 @@ import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SwapComponent } from './components/swap/swap.component';
+import { MargintradingComponent } from './components/margintrading/margintrading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     HeaderComponent,
-    SwapComponent
+    SwapComponent,
+    MargintradingComponent
   ],
   imports: [
     BrowserModule,
