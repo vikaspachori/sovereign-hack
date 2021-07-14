@@ -30,9 +30,7 @@ export class SwapComponent implements OnInit {
     const toSeriesData = Object.keys(this.toValueChartData).map(d => this.toValueChartData[d]);
     this.highChart.createCombinationChart(document.getElementById("fromaddressbar"), Object.keys(this.fromvalueChartData), fromSeriesData, "Transaction From", "From Transaction By Wallet", this.totalFromVal);
     this.highChart.createCombinationChart(document.getElementById("toaddressbar"), Object.keys(this.toValueChartData), toSeriesData, "Transaction To", "To Transaction By Wallet", this.totalToVal);
-    setTimeout(() => {
-      this.loader.hideLoader()
-    }, 0);
+    this.loader.hideLoader()
   }
 
 

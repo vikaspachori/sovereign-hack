@@ -12,7 +12,10 @@ export class LoaderService {
   }
 
   hideLoader() {
-    document.getElementById("pagecontainer").classList.remove("filter");
+
     document.getElementById("loader").style.display = "none";
+   setTimeout(() => {
+    document.getElementById("pagecontainer").classList.remove("filter");
+   }, 1000);
   }
 }

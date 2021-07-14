@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { SwapData, SwapInterface } from '../models/swap.model';
 import { environment } from 'src/environments/environment';
 import { contractsInformation } from '../models/contractsinformation';
+import { WallterVolume } from '../models/walletvolume.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,22 @@ export class CovalentapService {
     const getBlockapiUlrl = `${environment.apiUrl + chainid}/block_v2/${startDate}/${endDate}/?limit=1&key=${environment.apiKey}`;
     const heightData = await this.http.get(getBlockapiUlrl).toPromise() as any
     const blockHeight = heightData.data.items[0].height;
-    const swapDataurl = `${environment.apiUrl}${chainid}/events/address/${environment.address}/?starting-block=${blockHeight}&ending-block=latest&key=${environment.apiKey}`;
+    const swapDataurl = `${environment.apiUrl}${chainid}/events/address/${environment.swapNetworkAddress}/?starting-block=${blockHeight}&ending-block=latest&key=${environment.apiKey}`;
     const swapdata = await this.http.get(swapDataurl).toPromise() as any;
     return this.formatSwapData(swapdata.data.items)
   }
 
+  public async get24Vol(chaini: string): Promise<Array<WallterVolume>> {
+    const apiUrl = `${environment.apiUrl}${chaini}/address/${environment.soverentadress}/balances_v2/?&key=${environment.apiKey}`;
+    const data = await this.http.get(apiUrl).toPromise() as any;
+    const returnARray = new Array<WallterVolume>()
+    data.data.items.forEach(element => {
+      returnARray.push(element)
+    });
+    debugger;
+    return returnARray
+
+  }
   private getAdddressName(address: string): string {
     const keys = Object.keys(contractsInformation);
     const data = keys.filter(d => contractsInformation[d].address.toLowerCase() == address);
@@ -47,7 +59,7 @@ export class CovalentapService {
               hashFromObj[swapData.fromTokenName] = 1;
             }
             else {
-            
+
               hashFromObj[swapData.fromTokenName] += 1;
             }
           }
@@ -59,7 +71,7 @@ export class CovalentapService {
               hashToObject[swapData.toTokenName] = 1;
             }
             else {
-  
+
               hashToObject[swapData.toTokenName] += 1;
             }
 
@@ -89,10 +101,10 @@ export class CovalentapService {
       swappedDataArray.push(swapData)
     }
 
-    const swapdata :SwapData = {
-      fromVal:hashFromObj,
-      toVal:hashToObject,
-      swapdata : swappedDataArray
+    const swapdata: SwapData = {
+      fromVal: hashFromObj,
+      toVal: hashToObject,
+      swapdata: swappedDataArray
     }
     return swapdata;
   }
