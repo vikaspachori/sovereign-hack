@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { eventData, eventItem } from 'src/app/models/events.models';
+import { contractsInformation } from 'src/app/shared/models/contractsinformation';
 import { EventService } from 'src/app/shared/services/events/event.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { environment } from 'src/environments/environment';
@@ -18,14 +19,21 @@ export class MargintradingComponent implements OnInit {
 
   public buy: Array<eventItem> | any;
   public sell: Array<eventItem> | any;
-
+  public longs: any;
+  public shorts: any;
+  public profits: any;
+  public loss: any;
+  public totalprofit = 0;
+  public totalloss = 0;
   async ngOnInit(): Promise<void> {
     this.loader.showLoader();
+    this.longs = new Array<any>();
+    this.shorts = new Array<any>();
+    this.profits = new Array<any>();
+    this.loss = new Array<any>()
     this.buy = await this.eventService.getEvents(30, this.tradeTopicAddress, this.blockStartAddress);
     this.sell = await this.eventService.getEvents(30, this.closeTopicAddress, this.blockStartAddress);
     const matchedData = [];
-    const longs = [];
-    const shorts = [];
     this.buy.forEach(buyitem => {
       let user = buyitem.itemsarr.params[0];
       let loanid = buyitem.itemsarr.params[2];
@@ -42,21 +50,43 @@ export class MargintradingComponent implements OnInit {
     matchedData.forEach(d => {
       const buydate = new Date(d.buy.datetime);
       const sellate = new Date(d.sell.datetime);
+      const exitprice = parseFloat(d.sell.itemsarr.params[8].value);
+      const entryprice = parseFloat(d.buy.itemsarr.params[9].value);
+      const margin = exitprice - entryprice;
+      if (margin < 0) {
+        this.loss.push({ pair: d, margin: margin });
+        this.totalloss += margin
+      }
+      else {
+        this.totalprofit += margin;
+        this.profits.push({ pair: d, margin: margin })
+      }
+
+      this.profits = this.profits.sort((a, b) => b.margin - a.margin).slice(0, 5);
+      this.loss = this.loss.sort((a, b) => a.margin - b.margin).slice(0, 5);
+
       if (buydate < sellate) {
-        longs.push({
+        this.longs.push({
           buy: d.buy,
-          sell: d.sell
+          sell: d.sell,
+          margin: (exitprice - entryprice)
         })
       }
       else {
-        shorts.push({
+        this.shorts.push({
           buy: d.buy,
-          sell: d.sell
+          sell: d.sell,
+          margin: (exitprice - entryprice)
         })
       }
     })
-    debugger;
+    this.totalprofit = ((this.totalprofit) / Math.pow(10, 18));
+    this.totalloss = ((this.totalloss) / Math.pow(10, 18));
     this.loader.hideLoader();
   }
-
+  public getAdddressName(address: string): string {
+    const keys = Object.keys(contractsInformation);
+    const data = keys.filter(d => contractsInformation[d].address.toLowerCase() == address);
+    return data.length > 0 ? data[0].split("_")[0] : "N/A"
+  }
 }

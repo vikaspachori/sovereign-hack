@@ -1,0 +1,53 @@
+// .dashimagebg{
+//     background-image: url(https://live.sovryn.app/static/media/sovryn-logo-white.8b20e555.svg);
+//     background-repeat: no-repeat;
+//     background-color: #060606;
+//     padding: 22px;
+//     margin-top: 50px;
+//     /* margin-left: 75px; */
+//     width: 250px;
+//     margin: 0 auto;
+//     margin-top: 45px;
+// }
+
+.dashcard{
+    height : 310px;
+    box-shadow: 1px 0px 8px 3px white;
+    margin-left:18px;
+}
+
+.dash-card-heading{
+    height: 150px;
+    background: black;
+    text-align: center;
+}
+
+.dash-card-title{
+    color: white;
+    font-weight: 900;
+    text-shadow: 1px 4px 6px #b98628;
+    margin-top: 50px;
+}
+
+.vol-info{
+    padding: 12px;
+    font-weight: 800;
+    /* opacity: 0.7; */
+    text-align: center;
+    font-size: 32px;
+    text-shadow: -1px 1px 2px black;
+}
+.dash-table-cell{
+    vertical-align: middle;
+    text-align: center;
+    font-size: 16px;
+    text-shadow: 0 0 #ffffff00;
+}
+.dash-table-font{
+    text-shadow: -1px 1px 3px #cdb9b9;
+    font-size: 14px;
+}
+
+.dash-widget-shadow{
+    box-shadow: 1px 0px 15px 0px white;
+}

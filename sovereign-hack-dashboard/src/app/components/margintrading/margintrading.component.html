@@ -1,2 +1,175 @@
-<p>Buy calls: {{this.buy?.data?.items?.length}}</p>
-<p>Sell calls: {{this.sell?.data?.items?.length}}</p>
+<div class="row">
+  <div class="col-xl-2 col-md-2 col-sm-12 col-xs-12">
+    <div class="card dashcard">
+      <div class="dash-card-heading">
+        <div class="card-img-top dashimagebg" alt="Card image cap"></div>
+        <h3 class="dash-card-title">TOTAL BUY CALLS</h3>
+      </div>
+      <div class="card-body">
+        <div class="dash-card-info">
+          <div class="vol-info">
+            {{ this.buy?.length }}
+          </div>
+          <div style="text-align: center">
+            <pre>FROM 2021-01-10</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-md-2 col-sm-12 col-xs-12">
+    <div class="card dashcard">
+      <div class="dash-card-heading">
+        <div class="card-img-top dashimagebg" alt="Card image cap"></div>
+        <h3 class="dash-card-title">TOTAL SELL CALLS</h3>
+      </div>
+      <div class="card-body">
+        <div class="dash-card-info">
+          <div class="vol-info">
+            {{ this.sell?.length }}
+          </div>
+          <div style="text-align: center">
+            <pre>FROM 2021-01-10</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-md-2 col-sm-12 col-xs-12">
+    <div class="card dashcard">
+      <div class="dash-card-heading">
+        <div class="card-img-top dashimagebg" alt="Card image cap"></div>
+        <h3 class="dash-card-title">LONG CALLS</h3>
+      </div>
+      <div class="card-body">
+        <div class="dash-card-info">
+          <div class="vol-info">
+            {{ this.longs?.length }}
+          </div>
+          <div style="text-align: center">
+            <pre>FROM 2021-01-10</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-md-2 col-sm-12 col-xs-12">
+    <div class="card dashcard">
+      <div class="dash-card-heading">
+        <div class="card-img-top dashimagebg" alt="Card image cap"></div>
+        <h3 class="dash-card-title">SHORT CALLS</h3>
+      </div>
+      <div class="card-body">
+        <div class="dash-card-info">
+          <div class="vol-info">
+            {{ this.shorts?.length }}
+          </div>
+          <div style="text-align: center">
+            <pre>FROM 2021-01-10</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-md-2 col-sm-12 col-xs-12">
+    <div class="card dashcard">
+      <div class="dash-card-heading">
+        <div class="card-img-top dashimagebg" alt="Card image cap"></div>
+        <h3 class="dash-card-title">TOTAL PROFIT</h3>
+      </div>
+      <div class="card-body">
+        <div class="dash-card-info">
+          <div class="vol-info">
+            {{ this.totalprofit }}
+          </div>
+          <div style="text-align: center">
+            <pre>FROM 2021-01-10</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-md-2 col-sm-12 col-xs-12">
+    <div class="card dashcard">
+      <div class="dash-card-heading">
+        <div class="card-img-top dashimagebg" alt="Card image cap"></div>
+        <h3 class="dash-card-title">TOTAL LOSS</h3>
+      </div>
+      <div class="card-body">
+        <div class="dash-card-info">
+          <div class="vol-info">
+            {{ this.totalloss }}
+          </div>
+          <div style="text-align: center">
+            <pre>FROM 2021-01-10</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="margin-top: 15px">
+  <div class="row">
+    <h3 style="color: white">Profit/Loss Stats</h3>
+    <div class="col-md-6 col-xl-6 p-3 col-sm-12 col-xs-12">
+      <table class="table" style="background-color: whitesmoke; height: 100%">
+        <thead class="thead-dark">
+          <tr>
+            <th class="dash-table-cell" scope="col">Loan Token</th>
+            <th class="dash-table-cell" scope="col">Collateral Token</th>
+            <th class="dash-table-cell" scope="col">Profit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of profits">
+            <td class="dash-table-cell">
+              <span class="dash-table-font"
+                >{{ getAdddressName(item.pair.buy.itemsarr.params[4].value) }}
+              </span>
+            </td>
+            <td class="dash-table-cell">
+              <span class="dash-table-font"
+                >{{ getAdddressName(item.pair.buy.itemsarr.params[3].value) }}
+              </span>
+            </td>
+            <td class="dash-table-cell">
+              <span class="dash-table-font">{{ item.margin }} </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+   
+    <div class="col-md-6 col-xl-6 p-3 col-sm-12 col-xs-12">
+      <table
+        class="table col-md-5 col-xl-5 p-3 col-sm-12 col-xs-12"
+        style="background-color: whitesmoke; height: 100%"
+      >
+        <thead class="thead-dark">
+          <tr>
+            <th class="dash-table-cell" scope="col">Loan Token</th>
+            <th class="dash-table-cell" scope="col">Collateral Token</th>
+            <th class="dash-table-cell" scope="col">Loss</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of loss">
+            <td class="dash-table-cell">
+              <span class="dash-table-font">{{
+                getAdddressName(item.pair.buy.itemsarr.params[4].value)
+              }}</span>
+            </td>
+            <td class="dash-table-cell">
+              <span class="dash-table-font">{{
+                getAdddressName(item.pair.buy.itemsarr.params[3].value)
+              }}</span>
+            </td>
+            <td class="dash-table-cell">
+              <span class="dash-table-font">{{ item.margin }} </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
