@@ -32,8 +32,8 @@ export class DashboardComponent implements OnInit {
     this.lendingData = await this.covAPI.getLendingStats("30");
     this.formatLendingData()
 
-    this.highchartService.createCombinationChart(document.getElementById("volcharts"), this.chartdatalables, this.chartdatavals, "Last 24 Hours", "Wallet Volume", null, 'bar')
-    this.highchartService.createCombinationChart(document.getElementById("btc"), this.chartdata.map(d => d.name), this.chartdata.map(d => d.y), "Lending", "Lending Data", null, 'column')
+    this.highchartService.createCombinationChart(document.getElementById("volcharts"), this.chartdatalables, this.chartdatavals, "Last 24 Hours", "Protocol Balances", null, 'bar')
+    this.highchartService.createCombinationChart(document.getElementById("btc"), this.chartdata.map(d => d.name), this.chartdata.map(d => d.y), "Lending", "Lending ", null, 'column')
 
     this.highchartService.createChart(document.getElementById("utc"), this.chartdata, "Lending");
     this.loaderService.hideLoader()
