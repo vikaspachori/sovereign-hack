@@ -9,21 +9,21 @@
         <div class="dash-card-info">
           <div class="vol-info">
             <fa-icon [icon]="faCoins"></fa-icon>
-            73.9561 BTC
+            {{ this.btc24 }}
           </div>
-          <div class="vol-info">
-            <fa-icon [icon]="faDollarSign"></fa-icon>
-            2,688,432.17 USD
+          <div style="text-align: center;">
+            <pre>Last 24 Hours</pre>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div
-    class="col-xl-8 col-md-8 col-sm-12 col-xs-12 dash-widget-shadow "
-    style="height: 311px; overflow: auto"
+    class="col-xl-8 col-md-8 col-sm-12 col-xs-12 dash-widget-shadow"
+    style="height: 311px;"
   >
-    <table class="table" style="background-color: whitesmoke; height: 100%">
+    <div id="volcharts" style="height: 311px;"></div>
+    <!-- <table class="table" style="background-color: whitesmoke; height: 100%">
       <thead class="thead-dark">
         <tr>
           <th class="dash-table-cell" scope="col">Asset</th>
@@ -70,16 +70,16 @@
           </td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
   </div>
 </div>
 
 <div class="row p-3">
-  <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12 ">
+  <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12">
     <div class="dash-widget-shadow" id="btc"></div>
   </div>
-  <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12 ">
-    <div id="usd" class="dash-widget-shadow dash-chart-body" ></div>
+  <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12">
+    <div id="usd" class="dash-widget-shadow dash-chart-body"></div>
     >
   </div>
 </div>

@@ -4,6 +4,7 @@ import { SwapData, SwapInterface } from '../models/swap.model';
 import { environment } from 'src/environments/environment';
 import { contractsInformation } from '../models/contractsinformation';
 import { WallterVolume } from '../models/walletvolume.model';
+import { LendingData, LendingDataForGet } from 'src/app/models/lending.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,6 @@ export class CovalentapService {
     data.data.items.forEach(element => {
       returnARray.push(element)
     });
-    debugger;
     return returnARray
 
   }
@@ -109,6 +109,62 @@ export class CovalentapService {
     return swapdata;
   }
 
+
+
+  async getLendingStats(chainid: string): Promise<any> {
+    const d = new Date();
+    let gethelpdata = new Array<LendingDataForGet>();
+    const endDate = this.formatDate(d);
+    d.setDate(d.getDate() - 7);
+    const startDate = this.formatDate(d);
+    const getBlockapiUlrl = `${environment.apiUrl + chainid}/block_v2/${startDate}/${endDate}/?limit=1&key=${environment.apiKey}`;
+    const heightData = await this.http.get(getBlockapiUlrl).toPromise() as any
+    const blockHeight = heightData.data.items[0].height;
+
+    gethelpdata = Object.keys(contractsInformation).map(d => {
+      if (d.includes("_lending")) {
+        return {
+          name: d,
+          address: `${environment.apiUrl}${chainid}/events/address/${contractsInformation[d].address}/?starting-block=${blockHeight}&ending-block=latest&key=${environment.apiKey}`
+        };
+      }
+    }).filter(d => d) as any;
+
+    return await this.getAllUrls(gethelpdata);
+
+  }
+
+
+  parseToLendingData(items) {
+
+  }
+  async getAllUrls(urls) {
+    try {
+      var data = await Promise.all(
+        urls.map(
+          url =>
+            fetch(url.address).then(
+              async (response) => {
+                const tempdata = await response.json();
+                let filteredarr = [];
+                if (tempdata.data.items && tempdata.data.items.length > 0) {
+                  filteredarr = tempdata.data.items.filter(d => d.decoded.name === "Transfer")
+                }
+                return {
+                  name: url.name,
+                  data: filteredarr
+                }
+              }
+            )));
+
+      return (data)
+
+    } catch (error) {
+      console.log(error)
+
+      throw (error)
+    }
+  }
 
   private formatDate(date) {
     var d = new Date(date),

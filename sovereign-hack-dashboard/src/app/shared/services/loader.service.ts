@@ -13,8 +13,9 @@ export class LoaderService {
 
   hideLoader() {
 
-    document.getElementById("loader").style.display = "none";
+    
    setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
     document.getElementById("pagecontainer").classList.remove("filter");
    }, 1000);
   }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StorageService } from './shared/services/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sovereign-hack-dashboard';
-  constructor(){
-    setTimeout(() => {
-      document.getElementById("pagecontainer").classList.remove("filter");
-    }, 1000);
+  constructor(private st: StorageService) {
+  
   }
 }
