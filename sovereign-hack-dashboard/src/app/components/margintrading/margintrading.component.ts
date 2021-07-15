@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from 'src/app/shared/services/events/event.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-margintrading',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MargintradingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.eventService.getEvents(30, environment.soverentadress);
   }
 
 }
