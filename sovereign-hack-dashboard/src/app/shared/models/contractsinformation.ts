@@ -129,11 +129,6 @@ export const contractsInformation = {
         abi: "TesttokenAbi",
         blockNumber: 1408174,
     },
-    // BNBS_lending: {
-    //   address: '0xd1f225BEAE98ccc51c468d1E92d0331c4f93e566',
-    //   abi: LoanTokenLogicStandard,
-    //   blockNumber: 1406290,
-    // },
     BNBS_amm: {
         address: '0xf90558859d1bBC79544Cb2Da49bA7Ce471a6343e',
         abi: "LiquidityPoolV1Converter",
