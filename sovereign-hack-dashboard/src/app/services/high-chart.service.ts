@@ -51,9 +51,8 @@ export class HighChartService {
   createChart(container, seriesData: any, suffix: string, title: String = null) {
 
     this.defaultOptions.series[0].data = seriesData;
-    const me  = this;
+    const me = this;
     let opts = { ...this.defaultOptions };
-    debugger
     if (title) {
       opts.tooltip.pointFormat = ""
       delete opts.chart.events
@@ -119,6 +118,56 @@ export class HighChartService {
       },
       series: [{
         type: 'column',
+        name: seriesname,
+        data: seriesdata
+      }]
+    }
+
+    this.combinedoption = {
+      chart: {
+        type: 'bar'
+      },
+      title: {
+        text: title
+      },
+      subtitle: {
+        text: subtitle
+      },
+      xAxis: {
+        categories: cats,
+        title: {
+          text: null
+        }
+      },
+      yAxis: {
+        min: 0,
+        labels: {
+          overflow: 'justify'
+        }
+      },
+      plotOptions: {
+        bar: {
+          dataLabels: {
+            enabled: true
+          }
+        }
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor:
+          Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+        shadow: true
+      },
+      credits: {
+        enabled: false
+      },
+      series: [{
         name: seriesname,
         data: seriesdata
       }]

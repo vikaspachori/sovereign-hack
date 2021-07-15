@@ -32,7 +32,6 @@ export class CovalentapService {
     data.data.items.forEach(element => {
       returnARray.push(element)
     });
-    debugger;
     return returnARray
 
   }
