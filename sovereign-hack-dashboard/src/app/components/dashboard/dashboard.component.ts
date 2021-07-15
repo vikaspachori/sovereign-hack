@@ -23,15 +23,19 @@ export class DashboardComponent implements OnInit {
   btc24: number;
   chartdatalables = [];
   chartdatavals = [];
+  public chartdata: any
   async ngOnInit() {
     this.loaderService.showLoader();
     const voldata = await this.covAPI.get24Vol("30");
     this.updateVolWidgets(voldata)
+
     this.lendingData = await this.covAPI.getLendingStats("30");
-    debugger;
+    this.formatLendingData()
+
     this.highchartService.createCombinationChart(document.getElementById("volcharts"), this.chartdatalables, this.chartdatavals, "Last 24 Hours", "Wallet Volume", null, 'bar')
-    this.highchartService.createChart(document.getElementById("btc"), this.dataService.getPieChartDataBTC(), "BTC");
-    this.highchartService.createChart(document.getElementById("usd"), this.dataService.getPieChartDataUSD(), "USD");
+    this.highchartService.createCombinationChart(document.getElementById("btc"), this.chartdata.map(d => d.name), this.chartdata.map(d => d.y), "Lending", "Lending Data", null, 'column')
+
+    this.highchartService.createChart(document.getElementById("utc"), this.chartdata, "Lending");
     this.loaderService.hideLoader()
   }
 
@@ -51,4 +55,19 @@ export class DashboardComponent implements OnInit {
     this.btc24 = parseFloat(this.btc24.toFixed(2));
   }
 
+  formatLendingData() {
+    this.chartdata = [];
+    this.lendingData.forEach((d: any) => {
+      const trandata = d.data;
+      let agg = 0;
+      trandata.forEach(element => {
+        const t = parseFloat(element.decoded.params[2].value) / Math.pow(10, 18);
+        agg += t;
+      });
+      this.chartdata.push({
+        name: d.name,
+        y: agg
+      })
+    })
+  }
 }

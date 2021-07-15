@@ -83,7 +83,7 @@ export class HighChartService {
           });
 
           chart.setTitle({
-            text: 'TOTAL VALUE LOCKED(' + me.suffix + ')',
+            text: me.suffix,
             style: {
               fontWeight: 'bold'
             },
