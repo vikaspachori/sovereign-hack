@@ -15,10 +15,15 @@ export class EventService {
 
   //0xf640c1cfe1a912a0b0152b5a542e5c2403142eed75b06cde526cee54b1580e5c trade
 
-  async getEvents(chainAddress: number, contractAddress: string, blockNumber: number): Promise<any>{
-    const apiUrl = `${environment.apiUrl}${chainAddress}/events/topics/${contractAddress}/?starting-block=${blockNumber}&ending-block=latest&key=${environment.apiKey}`;
+  async getEvents(chainAddress: number, contractAddress: string, blockNumber: number): Promise<any> {
+    const apiUrl = `${environment.apiUrl}${chainAddress}/events/topics/${contractAddress}/?starting-block=${blockNumber}&ending-block=latest&page-size=5000&key=${environment.apiKey}`;
     const data = await this.http.get(apiUrl).toPromise() as any;
-    return data;
+    return data.data.items.map(d => {
+      return {
+        datetime: d.block_signed_at,
+        itemsarr: d.decoded
+      }
+    });
 
   }
 }
