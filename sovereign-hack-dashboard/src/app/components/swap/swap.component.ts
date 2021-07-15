@@ -24,12 +24,12 @@ export class SwapComponent implements OnInit {
     this.swapdata = await this.covalentapi.getSwapData("30");
     this.data = this.swapdata.swapdata;
     this.getBarChartData(this.data);
-    this.highChart.createChart(document.getElementById("fromaddress"), this.getKeyvalue(this.swapdata.fromVal), "", "Contribution from token ( wallet freq)");
-    this.highChart.createChart(document.getElementById("toaddress"), this.getKeyvalue(this.swapdata.toVal), "", "Contribution to token( wallet freq)");
+    this.highChart.createChart(document.getElementById("fromaddress"), this.getKeyvalue(this.swapdata.fromVal), "", "Contribution from token");
+    this.highChart.createChart(document.getElementById("toaddress"), this.getKeyvalue(this.swapdata.toVal), "", "Contribution to token");
     const fromSeriesData = Object.keys(this.fromvalueChartData).map(d => parseFloat(this.fromvalueChartData[d].toFixed(3)));
     const toSeriesData = Object.keys(this.toValueChartData).map(d => parseFloat(this.toValueChartData[d].toFixed(3)));
-    this.highChart.createCombinationChart(document.getElementById("fromaddressbar"), Object.keys(this.fromvalueChartData), fromSeriesData, "Transaction From", "From Transaction By Wallet", this.totalFromVal);
-    this.highChart.createCombinationChart(document.getElementById("toaddressbar"), Object.keys(this.toValueChartData), toSeriesData, "Transaction To", "To Transaction By Wallet", this.totalToVal);
+    this.highChart.createCombinationChart(document.getElementById("fromaddressbar"), Object.keys(this.fromvalueChartData), fromSeriesData, "Transaction From", "From Transaction By Token", this.totalFromVal);
+    this.highChart.createCombinationChart(document.getElementById("toaddressbar"), Object.keys(this.toValueChartData), toSeriesData, "Transaction To", "To Transaction By Token", this.totalToVal);
     this.loader.hideLoader()
   }
 
