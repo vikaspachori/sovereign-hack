@@ -26,7 +26,7 @@ export class SwapComponent implements OnInit {
     this.getBarChartData(this.data);
     this.highChart.createChart(document.getElementById("fromaddress"), this.getKeyvalue(this.swapdata.fromVal), "", "Contribution from token ( wallet freq)");
     this.highChart.createChart(document.getElementById("toaddress"), this.getKeyvalue(this.swapdata.toVal), "", "Contribution to token( wallet freq)");
-    const fromSeriesData = Object.keys(this.fromvalueChartData).map(d => this.fromvalueChartData[d]);
+    const fromSeriesData = Object.keys(this.fromvalueChartData).map(d => parseFloat(this.fromvalueChartData[d].toFixed(3)));
     const toSeriesData = Object.keys(this.toValueChartData).map(d => this.toValueChartData[d]);
     this.highChart.createCombinationChart(document.getElementById("fromaddressbar"), Object.keys(this.fromvalueChartData), fromSeriesData, "Transaction From", "From Transaction By Wallet", this.totalFromVal);
     this.highChart.createCombinationChart(document.getElementById("toaddressbar"), Object.keys(this.toValueChartData), toSeriesData, "Transaction To", "To Transaction By Wallet", this.totalToVal);

@@ -103,7 +103,7 @@ export class HighChartService {
     Highcharts.chart(container, opts);
   }
 
-  createCombinationChart(container, cats, seriesdata, seriesname, title, subtitle): void {
+  createCombinationChart(container, cats, seriesdata, seriesname, title, subtitle, type: string = "column"): void {
     //, title, cats, concurrencydata, pietitle
 
     this.combinedoption = {
@@ -125,7 +125,7 @@ export class HighChartService {
 
     this.combinedoption = {
       chart: {
-        type: 'bar'
+        type: type
       },
       title: {
         text: title
@@ -146,7 +146,13 @@ export class HighChartService {
         }
       },
       plotOptions: {
+      
         bar: {
+          dataLabels: {
+            enabled: true
+          }
+        },
+        column: {
           dataLabels: {
             enabled: true
           }

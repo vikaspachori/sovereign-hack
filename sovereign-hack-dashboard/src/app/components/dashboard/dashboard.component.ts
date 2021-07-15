@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     this.loaderService.showLoader();
     const voldata = await this.covAPI.get24Vol("30");
     this.updateVolWidgets(voldata)
-    this.highchartService.createCombinationChart(document.getElementById("volcharts"), this.chartdatalables, this.chartdatavals, "Last 24 Hours", "Wallet Volume", null)
+    this.highchartService.createCombinationChart(document.getElementById("volcharts"), this.chartdatalables, this.chartdatavals, "Last 24 Hours", "Wallet Volume", null,'bar')
     this.lendingData = this.dataService.getLendingStats();
     this.highchartService.createChart(document.getElementById("btc"), this.dataService.getPieChartDataBTC(), "BTC");
     this.highchartService.createChart(document.getElementById("usd"), this.dataService.getPieChartDataUSD(), "USD");
@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
       }
       this.btc24 += tempCal;
       this.chartdatalables.push(element.contract_ticker_symbol);
-      this.chartdatavals.push(tempCal);
+      this.chartdatavals.push(parseFloat(tempCal.toFixed(2)));
 
     }
     this.btc24 = parseFloat(this.btc24.toFixed(2));
